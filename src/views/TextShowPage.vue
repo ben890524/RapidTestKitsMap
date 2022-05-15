@@ -55,6 +55,7 @@
         v-for="openDataElement in showOpenData"
         :key="openDataElement.id"
         :openDataElement="openDataElement"
+        :openDataRefreshTime="openDataRefreshTime"
       />
     </div>
   </div>
@@ -536,6 +537,7 @@ const autoUpdateIntervalForOneMinute = ref<number>(60000);
 let allOpenData = ref<OpenData[]>([]);
 let showOpenData = ref<OpenData[]>([]);
 let autoUpdateOpenData = ref<OpenData[]>([]);
+let openDataRefreshTime = ref<string>("");
 let targetFilterDataCountyNameIndex = ref<number>(-1);
 let targetFilterDataCountySectionIndex = ref<number>(-1);
 let targetFilterData = ref<FilterData>({ countyName: "", countySection: [] });
@@ -571,6 +573,12 @@ const setIsAutoUpdating = () => {
 };
 const setIsNotAutoUpdating = () => {
   isNowAutoUpdating.value = false;
+};
+const setOpenDataRefreshTime = () => {
+  const currentDate = new Date();
+  openDataRefreshTime.value = `${currentDate.toDateString()} ${currentDate
+    .toTimeString()
+    .substring(0, 8)}`;
 };
 const filterChangeHandler = () => {
   if (targetFilterDataCountyNameIndex.value > -1) {
@@ -619,14 +627,11 @@ const autoUpdateNewShowOpendata = () => {
 const autoUpdateCompareShowOpenData = async () => {
   setIsAutoUpdating();
   autoUpdateOpenData.value = await getOpenDataJson();
+  setOpenDataRefreshTime();
   autoUpdateOpenData.value = autoUpdateOpenData.value.filter(
     (openDataElement) => {
       return openDataElement.address.includes(filterString.value);
     }
-  );
-  console.log(
-    JSON.stringify(showOpenData.value) ===
-      JSON.stringify(autoUpdateOpenData.value)
   );
   if (
     !(
@@ -651,6 +656,8 @@ onMounted(async () => {
   setIsNowLoading();
   allOpenData.value = await getOpenDataJson();
   showOpenData.value = allOpenData.value;
+  setOpenDataRefreshTime();
+  setOpenDataRefreshTime();
   setIsNotNowLoading();
   setAutoUpdateTimer();
 });

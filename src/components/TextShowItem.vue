@@ -94,7 +94,7 @@
 /* import img */
 import googleMapsIcon from "@/assets/img/GoogleMapsIcon.svg";
 /* vue module */
-import { PropType, ref, onMounted } from "vue";
+import { PropType, ref } from "vue";
 /* interfaces */
 import OpenData from "@/interfaces/OpenData";
 
@@ -103,13 +103,10 @@ const props = defineProps({
     type: Object as PropType<OpenData>,
     required: true,
   },
-});
-let openDataRefreshTime = ref<string>("");
-onMounted(() => {
-  const currentDate = new Date();
-  openDataRefreshTime.value = `${currentDate.toDateString()} ${currentDate
-    .toTimeString()
-    .substring(0, 8)}`;
+  openDataRefreshTime: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
