@@ -140,10 +140,11 @@ onMounted(() => {
   }
   table.openDataTable.mobile {
     display: table;
+    font-size: 14px;
     tr {
       td,
       th {
-        padding: 0.5rem;
+        padding: 0.25rem 0.5rem;
         border: 0.5px solid #c8c8c8;
       }
       th {

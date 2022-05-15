@@ -626,13 +626,12 @@ onMounted(async () => {
         align-items: center;
         flex-wrap: wrap;
         padding: 2.5px 5px;
-        margin-left: 10px;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
         .filterItemSelect {
           position: relative;
           display: flex;
-          width: 150px;
+          width: 90px;
           height: 30px;
           border-radius: 0.25em;
           overflow: hidden;
@@ -657,13 +656,13 @@ onMounted(async () => {
           position: absolute;
           top: 0;
           right: 0;
-          width: 30px;
+          width: 20px;
           height: 30px;
-          min-width: 30px;
+          min-width: 20px;
           min-height: 30px;
-          max-width: 30px;
+          max-width: 20px;
           max-height: 30px;
-          padding: 5px 0 5px 10px;
+          padding: 7.5px 0 5px 5px;
           background-color: rgb(92, 131, 169);
           transition: 0.25s all ease;
           pointer-events: none;
@@ -698,7 +697,7 @@ onMounted(async () => {
     }
   }
   .textShow {
-    height: calc(100vh - 251px);
+    height: calc(100vh - 173px);
     overflow-y: auto;
     margin-top: 10px;
     margin-right: 5px;
@@ -740,14 +739,7 @@ onMounted(async () => {
     }
   }
 }
-@media screen and (min-width: 480px) {
-  .textShowPage {
-    .textShow {
-      height: calc(100vh - 216px);
-    }
-  }
-}
-@media screen and (min-width: 667px) {
+@media screen and (min-width: 503px) {
   .textShowPage {
     .textShowFilterBar {
       .button {
@@ -755,7 +747,31 @@ onMounted(async () => {
       }
     }
     .textShow {
-      height: calc(100vh - 171px);
+      height: calc(100vh - 148px);
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .textShowPage {
+    .textShowFilterBar {
+      .filter {
+        .filterItem {
+          font-size: 20px;
+          .filterItemSelect {
+            transition: 0.125s ease;
+            width: 120px;
+          }
+          .filterItemSelect::after {
+            width: 25px;
+            min-width: 25px;
+            max-width: 25px;
+            padding: 5px 0 5px 5px;
+          }
+        }
+      }
+    }
+    .textShow {
+      height: calc(100vh - 156px);
     }
   }
 }

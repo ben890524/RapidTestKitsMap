@@ -28,7 +28,7 @@
 </template>
 <script setup lang="ts">
 /* vue module */
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 /* services */
 import {
   redirectToShowInText,
@@ -36,7 +36,10 @@ import {
 } from "@/services/Redirect.service";
 
 const currentTab = ref("");
-
+const initCheckRouter = () => {
+  if (window.location.href.includes("textshow")) currentTab.value = "text";
+  if (window.location.href.includes("mapshow")) currentTab.value = "map";
+};
 const changeTabText = () => {
   currentTab.value = "text";
   redirectToShowInText();
@@ -45,6 +48,9 @@ const changeTabMap = () => {
   currentTab.value = "map";
   redirectToShowInMap();
 };
+onMounted(() => {
+  initCheckRouter();
+});
 </script>
 <style lang="scss" scoped>
 .testKitPage {
@@ -55,8 +61,9 @@ const changeTabMap = () => {
     .pageTitle {
       text-align: center;
       > h1 {
-        padding: 10px 0;
+        padding: 5px 0;
         margin: 0;
+        font-size: 22px;
         color: whitesmoke;
       }
     }
@@ -67,12 +74,12 @@ const changeTabMap = () => {
       .tab {
         background-color: #262626;
         width: 100%;
-        padding: 10px 0;
+        padding: 5px 0;
         transition: 0.25s ease-in-out;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         text-align: center;
-        font-size: 24px;
+        font-size: 16px;
         font-weight: 600;
         letter-spacing: 1px;
         color: whitesmoke;
@@ -81,6 +88,39 @@ const changeTabMap = () => {
       .tab.active {
         background-color: whitesmoke;
         color: #262626;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 503px) {
+  .testKitPage {
+    .testKitPageBar {
+      .pageTitle {
+        > h1 {
+          padding: 10px 0;
+        }
+      }
+      .pageTabs {
+        .tab {
+          padding: 10px 0;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .testKitPage {
+    .testKitPageBar {
+      .pageTitle {
+        > h1 {
+          font-size: 24px;
+        }
+      }
+      .pageTabs {
+        .tab {
+          font-size: 20px;
+        }
       }
     }
   }
