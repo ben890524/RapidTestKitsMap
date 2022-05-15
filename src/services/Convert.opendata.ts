@@ -2,7 +2,15 @@
 import { getOpenData } from "@/services/Axios.opendata";
 /* interfaces */
 import OpenData from "@/interfaces/OpenData";
-
+const sortOpenDataByAddress = (next: OpenData, current: OpenData) => {
+  if (next.address < current.address) {
+    return -1;
+  }
+  if (next.address > current.address) {
+    return 1;
+  }
+  return 0;
+};
 export const getOpenDataJson = async () => {
   const rawOpenData = (await getOpenData()).data.split("\r\n");
   const openData = rawOpenData.slice(1);
@@ -25,5 +33,6 @@ export const getOpenDataJson = async () => {
       openDataJson.push(newOpenData);
     }
   });
+  openDataJson.sort(sortOpenDataByAddress);
   return openDataJson;
 };

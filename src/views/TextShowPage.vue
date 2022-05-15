@@ -535,6 +535,7 @@ let targetFilterDataCountySectionIndex = ref<number>(-1);
 let targetFilterData = ref<FilterData>({ countyName: "", countySection: [] });
 let filterString = ref<string>("");
 let isNowLoading = ref<boolean>(false);
+
 const setDefaultCountyNameIndex = () => {
   targetFilterDataCountyNameIndex.value = filterDefaultIndex.value;
 };
