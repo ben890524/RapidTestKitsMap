@@ -4,6 +4,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [vue()],
+  base: "./",
   alias: {
     "@": path.resolve(__dirname, "./src"),
   },
@@ -14,7 +15,7 @@ export default defineConfig({
     host: "localhost",
     port: 8080,
   },
-  build:{
-    outDir:"docs"
-  }
+  build: {
+    outDir: "docs",
+  },
 });
