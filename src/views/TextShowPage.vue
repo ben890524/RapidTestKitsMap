@@ -767,7 +767,9 @@ onBeforeUnmount(() => {
     text-decoration: underline;
   }
   .textShow {
-    height: calc(var(--vh));
+    height: calc(
+      var(--mobileHeight)
+    ); // define in /index.html resize function to solve mobile container 100vh problem
     overflow-y: auto;
     margin-right: 5px;
     border-radius: 8px;
@@ -816,9 +818,6 @@ onBeforeUnmount(() => {
         margin-top: 0px;
       }
     }
-    // .textShow {
-    //   height: calc(100vh - 169px);
-    // }
   }
 }
 @media screen and (min-width: 768px) {

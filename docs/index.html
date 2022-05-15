@@ -8,21 +8,21 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0"
     />
     <title>現有快篩試劑查詢</title>
-    <script type="module" crossorigin src="./assets/index.aa91f739.js"></script>
-    <link rel="stylesheet" href="./assets/index.79fb20db.css">
+    <script type="module" crossorigin src="./assets/index.fc78bd1a.js"></script>
+    <link rel="stylesheet" href="./assets/index.b84b63e4.css">
   </head>
   <body>
     <div id="app"></div>
     
     <script defer>
       function calculateVh() {
-        let height;
-        if (window.innerHeight >= 503) {
-          hight = window.innerHeight - 169;
+        let mobileHeight;
+        if (window.innerWidth >= 503) {
+          mobileHeight = window.innerHeight - 169;
         } else {
-          hight = window.innerHeight - 194;
+          mobileHeight = window.innerHeight - 199;
         }
-        document.documentElement.style.setProperty("--vh", hight + "px");
+        document.documentElement.style.setProperty("--mobileHeight", mobileHeight + "px");
       }
       // Initial calculation
       calculateVh();

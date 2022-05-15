@@ -8,10 +8,11 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  min-height: 100vh;            /* fall-back */
+  min-height: 100vh; /* fall-back */
   min-height: -moz-available;
   min-height: -webkit-fill-available;
   min-height: fill-available;
+  background-color: whitesmoke;
 }
 #app {
   padding: 0;
@@ -20,6 +21,7 @@ body {
   height: fill-available;
   height: -webkit-fill-available;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
 }
 </style>
 <!-- https://data.nhi.gov.tw/resource/Nhi_Fst/Fstdata.csv -->
