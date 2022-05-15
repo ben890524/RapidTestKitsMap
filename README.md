@@ -1,0 +1,2 @@
+# RapidTestKitsMap
+RapidTestKitsMap
