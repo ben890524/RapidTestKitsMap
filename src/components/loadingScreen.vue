@@ -6,6 +6,7 @@
   </div>
 </template>
 <script setup lang="ts">
+/* import img */
 import loadingSpinner from "@/assets/img/spinner.gif";
 const props = defineProps({
   isNowLoading: {

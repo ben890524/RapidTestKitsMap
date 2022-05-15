@@ -7,7 +7,16 @@
       </tr>
       <tr>
         <th>醫事機構地址</th>
-        <td>{{ openDataElement.address }}</td>
+        <td class="tdIcon">
+          {{ openDataElement.address }}
+          <a
+            class="googleMapsIcon"
+            target="_blank"
+            :href="`https://www.google.com/maps?q=${openDataElement.name}+${openDataElement.address}`"
+          >
+            <img :src="googleMapsIcon" alt="" />
+          </a>
+        </td>
       </tr>
       <tr>
         <th>醫事機構代碼</th>
@@ -48,7 +57,16 @@
       <tr>
         <th colspan="4" class="openDataLeft">醫事機構地址</th>
         <th class="openDataRight">醫事機構地圖</th>
-        <td>Link</td>
+        <td class="tdIcon">
+          <a
+            class="googleMapsIcon"
+            target="_blank"
+            :href="`https://www.google.com/maps?q=${openDataElement.name}+${openDataElement.address}`"
+          >
+            Link
+            <img :src="googleMapsIcon" alt="" />
+          </a>
+        </td>
       </tr>
       <tr>
         <td colspan="4" class="openDataLeft">{{ openDataElement.address }}</td>
@@ -73,6 +91,8 @@
   </div>
 </template>
 <script setup lang="ts">
+/* import img */
+import googleMapsIcon from "@/assets/img/GoogleMapsIcon.svg";
 /* vue module */
 import { PropType, ref, onMounted } from "vue";
 /* interfaces */
@@ -116,6 +136,23 @@ onMounted(() => {
         color: red;
         font-weight: 600;
       }
+      td.tdIcon {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .googleMapsIcon {
+          height: 25px;
+          padding: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          img {
+            padding: 5px 0 5px 5px;
+            height: 100%;
+          }
+        }
+      }
     }
   }
   table.openDataTable.browser {
@@ -125,6 +162,14 @@ onMounted(() => {
       th {
         padding: 0.5rem 1rem;
         border: 0.5px solid #c8c8c8;
+      }
+      td.tdIcon {
+        .googleMapsIcon {
+          transition: 0.25s ease;
+        }
+        .googleMapsIcon:hover {
+          transform: translateX(5px);
+        }
       }
       .openDataLeft {
         width: 50%;
