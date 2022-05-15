@@ -46,6 +46,9 @@
         <button @click="clearFilter()">顯示全部</button>
       </div>
     </div>
+    <div class="textShowItemCount">
+      <span>共 {{ showOpenData.length }} 筆資料</span>
+    </div>
     <div class="textShow">
       <div class="filterNoTarget" v-if="showOpenData.length === 0">
         <span>所查區域無庫存！</span>
@@ -756,10 +759,16 @@ onBeforeUnmount(() => {
       }
     }
   }
+  .textShowItemCount {
+    padding: 5px 10px 5px 0;
+    text-align: right;
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: underline;
+  }
   .textShow {
-    height: calc(100vh - 173px);
+    height: calc(100vh - 194px);
     overflow-y: auto;
-    margin-top: 10px;
     margin-right: 5px;
     border-radius: 8px;
     &::-webkit-scrollbar {
@@ -808,7 +817,7 @@ onBeforeUnmount(() => {
       }
     }
     .textShow {
-      height: calc(100vh - 148px);
+      height: calc(100vh - 169px);
     }
   }
 }
@@ -833,7 +842,7 @@ onBeforeUnmount(() => {
       }
     }
     .textShow {
-      height: calc(100vh - 156px);
+      height: calc(100vh - 177px);
     }
   }
 }
