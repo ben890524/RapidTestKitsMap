@@ -165,7 +165,11 @@ onMounted(() => {
       }
       td.tdIcon {
         .googleMapsIcon {
+          padding: 0;
           transition: 0.25s ease;
+          img {
+            padding: 5px 0 5px 10px;
+          }
         }
         .googleMapsIcon:hover {
           transform: translateX(5px);
