@@ -157,6 +157,8 @@ onMounted(() => {
 }
 @media only screen and (min-width: 768px) {
   .openDataElement {
+    padding: 20px;
+    margin-top: 20px;
     table.openDataTable.browser {
       display: table;
     }

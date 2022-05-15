@@ -753,6 +753,7 @@ onMounted(async () => {
 }
 @media screen and (min-width: 768px) {
   .textShowPage {
+    padding: 5px 12.5px 5px 15px;
     .textShowFilterBar {
       .filter {
         .filterItem {
