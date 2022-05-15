@@ -1,4 +1,4 @@
-import { router } from "../router/index";
+import { router } from "@/router/index";
 
 export const redirectToHomePage = () => router.push("/");
 export const redirectToShowInText = () => router.push("/index/textshow");

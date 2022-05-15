@@ -14,7 +14,7 @@
               <option value="-1" selected>請選擇</option>
               <option
                 v-for="(filterCounty, index) in filterData"
-                :key="filterCounty"
+                :key="filterCounty.countyName"
                 :value="index"
               >
                 {{ filterCounty.countyName }}
@@ -64,10 +64,10 @@
 /* vue module */
 import { ref, reactive, onMounted } from "vue";
 /* services */
-import { getOpenDataJson } from "@/services/Convert.opendata.ts";
+import { getOpenDataJson } from "@/services/Convert.opendata";
 /* interfaces */
-import OpenData from "@/interfaces/OpenData.ts";
-import FilterData from "@/interfaces/FilterData.ts";
+import OpenData from "@/interfaces/OpenData";
+import FilterData from "@/interfaces/FilterData";
 /* components */
 import TextShowItem from "@/components/TextShowItem.vue";
 import loadingScreen from "@/components/loadingScreen.vue";

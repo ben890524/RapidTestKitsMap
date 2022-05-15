@@ -76,7 +76,7 @@
 /* vue module */
 import { PropType, ref, onMounted } from "vue";
 /* interfaces */
-import OpenData from "@/interfaces/OpenData.ts";
+import OpenData from "@/interfaces/OpenData";
 
 const props = defineProps({
   openDataElement: {

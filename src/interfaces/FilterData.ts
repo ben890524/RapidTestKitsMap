@@ -1,4 +1,4 @@
-export interface FilterData {
+export default interface FilterData {
   countyName: string;
   countySection: Array<string>;
 }

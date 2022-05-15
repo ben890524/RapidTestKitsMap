@@ -1,4 +1,4 @@
-export interface OpenData {
+export default interface OpenData {
   id: string;
   name: string;
   address: string;
