@@ -12,5 +12,24 @@
   <body>
     <div id="app"></div>
     <script type="module" src="./src/main.ts"></script>
+    <script defer>
+      function calculateVh() {
+        let height;
+        if (window.innerHeight >= 503) {
+          hight = window.innerHeight - 169;
+        } else {
+          hight = window.innerHeight - 194;
+        }
+        document.documentElement.style.setProperty("--vh", hight + "px");
+      }
+      // Initial calculation
+      calculateVh();
+
+      // Re-calculate on resize
+      window.addEventListener("resize", calculateVh);
+
+      // Re-calculate on device orientation change
+      window.addEventListener("orientationchange", calculateVh);
+    </script>
   </body>
 </html>

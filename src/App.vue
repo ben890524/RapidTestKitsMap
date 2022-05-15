@@ -8,12 +8,17 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  min-height: 100vh;            /* fall-back */
+  min-height: -moz-available;
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
 }
 #app {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100vh;
+  height: fill-available;
+  height: -webkit-fill-available;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 </style>

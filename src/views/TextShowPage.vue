@@ -49,7 +49,7 @@
     <div class="textShowItemCount">
       <span>共 {{ showOpenData.length }} 筆資料</span>
     </div>
-    <div class="textShow">
+    <div class="textShow" id="textShow">
       <div class="filterNoTarget" v-if="showOpenData.length === 0">
         <span>所查區域無庫存！</span>
       </div>
@@ -767,7 +767,7 @@ onBeforeUnmount(() => {
     text-decoration: underline;
   }
   .textShow {
-    height: calc(100vh - 194px);
+    height: calc(var(--vh));
     overflow-y: auto;
     margin-right: 5px;
     border-radius: 8px;
@@ -816,9 +816,9 @@ onBeforeUnmount(() => {
         margin-top: 0px;
       }
     }
-    .textShow {
-      height: calc(100vh - 169px);
-    }
+    // .textShow {
+    //   height: calc(100vh - 169px);
+    // }
   }
 }
 @media screen and (min-width: 768px) {

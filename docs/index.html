@@ -8,11 +8,30 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0"
     />
     <title>現有快篩試劑查詢</title>
-    <script type="module" crossorigin src="./assets/index.67479036.js"></script>
-    <link rel="stylesheet" href="./assets/index.6d6ac292.css">
+    <script type="module" crossorigin src="./assets/index.aa91f739.js"></script>
+    <link rel="stylesheet" href="./assets/index.79fb20db.css">
   </head>
   <body>
     <div id="app"></div>
     
+    <script defer>
+      function calculateVh() {
+        let height;
+        if (window.innerHeight >= 503) {
+          hight = window.innerHeight - 169;
+        } else {
+          hight = window.innerHeight - 194;
+        }
+        document.documentElement.style.setProperty("--vh", hight + "px");
+      }
+      // Initial calculation
+      calculateVh();
+
+      // Re-calculate on resize
+      window.addEventListener("resize", calculateVh);
+
+      // Re-calculate on device orientation change
+      window.addEventListener("orientationchange", calculateVh);
+    </script>
   </body>
 </html>
