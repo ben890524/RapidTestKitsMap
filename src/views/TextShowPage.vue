@@ -58,11 +58,14 @@
       />
     </div>
   </div>
-  <loadingScreen :isNowLoading="isNowLoading" />
+  <loadingScreen
+    :isNowLoading="isNowLoading"
+    :isNowAutoUpdating="isNowAutoUpdating"
+  />
 </template>
 <script setup lang="ts">
 /* vue module */
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 /* services */
 import { getOpenDataJson } from "@/services/Convert.opendata";
 /* interfaces */
@@ -528,13 +531,18 @@ const filterData = reactive<FilterData[]>([
     countySection: ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"],
   },
 ]);
+const autoUpdateIntervalForOneMinute = ref<number>(60000);
+
 let allOpenData = ref<OpenData[]>([]);
 let showOpenData = ref<OpenData[]>([]);
+let autoUpdateOpenData = ref<OpenData[]>([]);
 let targetFilterDataCountyNameIndex = ref<number>(-1);
 let targetFilterDataCountySectionIndex = ref<number>(-1);
 let targetFilterData = ref<FilterData>({ countyName: "", countySection: [] });
 let filterString = ref<string>("");
 let isNowLoading = ref<boolean>(false);
+let isNowAutoUpdating = ref<boolean>(false);
+let autoUpdateIntervalTimerId = ref<number>(0);
 
 const setDefaultCountyNameIndex = () => {
   targetFilterDataCountyNameIndex.value = filterDefaultIndex.value;
@@ -557,6 +565,12 @@ const setIsNowLoading = () => {
 };
 const setIsNotNowLoading = () => {
   isNowLoading.value = false;
+};
+const setIsAutoUpdating = () => {
+  isNowAutoUpdating.value = true;
+};
+const setIsNotAutoUpdating = () => {
+  isNowAutoUpdating.value = false;
 };
 const filterChangeHandler = () => {
   if (targetFilterDataCountyNameIndex.value > -1) {
@@ -599,11 +613,49 @@ const clearFilter = async () => {
   await setDefaultShowOpenData();
   setIsNotNowLoading();
 };
+const autoUpdateNewShowOpendata = () => {
+  showOpenData.value = autoUpdateOpenData.value;
+};
+const autoUpdateCompareShowOpenData = async () => {
+  setIsAutoUpdating();
+  autoUpdateOpenData.value = await getOpenDataJson();
+  autoUpdateOpenData.value = autoUpdateOpenData.value.filter(
+    (openDataElement) => {
+      return openDataElement.address.includes(filterString.value);
+    }
+  );
+  console.log(
+    JSON.stringify(showOpenData.value) ===
+      JSON.stringify(autoUpdateOpenData.value)
+  );
+  if (
+    !(
+      JSON.stringify(showOpenData.value) ===
+      JSON.stringify(autoUpdateOpenData.value)
+    )
+  ) {
+    autoUpdateNewShowOpendata();
+  }
+  setIsNotAutoUpdating();
+};
+const setAutoUpdateTimer = () => {
+  autoUpdateIntervalTimerId.value = window.setInterval(
+    async () => await autoUpdateCompareShowOpenData(),
+    autoUpdateIntervalForOneMinute.value
+  );
+};
+const clearAutoUpdateTimer = () => {
+  window.clearInterval(autoUpdateIntervalTimerId.value);
+};
 onMounted(async () => {
   setIsNowLoading();
   allOpenData.value = await getOpenDataJson();
   showOpenData.value = allOpenData.value;
   setIsNotNowLoading();
+  setAutoUpdateTimer();
+});
+onBeforeUnmount(() => {
+  clearAutoUpdateTimer();
 });
 </script>
 
