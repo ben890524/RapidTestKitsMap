@@ -134,11 +134,12 @@ const props = defineProps({
         font-weight: 600;
       }
       td.tdIcon {
+        height: max-content;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .googleMapsIcon {
-          height: 25px;
+          height: 27.5px;
           padding: 5px;
           display: flex;
           justify-content: center;
