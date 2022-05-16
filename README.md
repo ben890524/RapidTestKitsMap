@@ -1,5 +1,5 @@
 # Demo Page
-- [現有快篩試劑列表](https://ben890524.github.io/RapidTestKitsMap/#/index/textshow)
+- [現有快篩試劑列表](https://ben890524.github.io/RapidTestKitsMap/#/index/textshow){:target="_blank"}
 
 # Vue 3 + TypeScript + Vite
 
