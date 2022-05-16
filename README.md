@@ -1,5 +1,5 @@
 # Demo Page
-- <a href="https://ben890524.github.io/RapidTestKitsMap/#/index/textshow" target="_blank">現有快篩試劑列表</a>
+- [現有快篩試劑列表](https://ben890524.github.io/RapidTestKitsMap/#/index/textshow)
 
 # Vue 3 + TypeScript + Vite
 

@@ -629,6 +629,7 @@ const autoUpdateNewShowOpendata = () => {
 };
 const autoUpdateCompareShowOpenData = async () => {
   setIsAutoUpdating();
+  allOpenData.value = await getOpenDataJson();
   autoUpdateOpenData.value = await getOpenDataJson();
   setOpenDataRefreshTime();
   autoUpdateOpenData.value = autoUpdateOpenData.value.filter(
