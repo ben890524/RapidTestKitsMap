@@ -114,20 +114,20 @@ const props = defineProps({
 .openDataElement {
   padding: 15px;
   margin-top: 10px;
-  background-color: white;
+  background-color: var(--table-background-color);
   border-radius: 8px;
   table.openDataTable {
     width: 100%;
     border-spacing: 0;
-    border-color: black;
+    border: 1px solid var(--table-table-border-color);
     tr {
-      border: 0.5px solid #c8c8c8;
+      border: 0.5px solid var(--table-table-border-color);
       td,
       th {
-        border: 0.5px solid #c8c8c8;
+        border: 0.5px solid var(--table-table-border-color);
       }
       > th {
-        background-color: #9ce0c0;
+        background-color: var(--table-th-color);
       }
       .important {
         color: red;
@@ -154,13 +154,15 @@ const props = defineProps({
   }
   table.openDataTable.browser {
     display: none;
+    text-align: center;
     tr {
       td,
       th {
         padding: 0.5rem 1rem;
-        border: 0.5px solid #c8c8c8;
+        border: 0.5px solid var(--table-table-border-color);
       }
       td.tdIcon {
+        justify-content: center;
         .googleMapsIcon {
           padding: 0;
           transition: 0.25s ease;
@@ -191,7 +193,7 @@ const props = defineProps({
       td,
       th {
         padding: 0.25rem 0.5rem;
-        border: 0.5px solid #c8c8c8;
+        border: 0.5px solid var(--table-table-border-color);
       }
       th {
         width: 25%;
@@ -204,7 +206,7 @@ const props = defineProps({
 @media only screen and (min-width: 768px) {
   .openDataElement {
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 35px;
     table.openDataTable.browser {
       display: table;
     }

@@ -57,14 +57,14 @@ onMounted(() => {
   padding: 0;
   margin: 0;
   .testKitPageBar {
-    background-color: #262626;
+    background-color: var(--app-sub-color);
     .pageTitle {
       text-align: center;
       > h1 {
         padding: 5px 0;
         margin: 0;
         font-size: 22px;
-        color: whitesmoke;
+        color: #042A2B;
       }
     }
     .pageTabs {
@@ -72,7 +72,7 @@ onMounted(() => {
       justify-content: center;
       align-items: center;
       .tab {
-        background-color: #262626;
+        background-color: var(--app-sub-color);
         width: 100%;
         padding: 5px 0;
         transition: 0.25s ease-in-out;
@@ -82,12 +82,12 @@ onMounted(() => {
         font-size: 16px;
         font-weight: 600;
         letter-spacing: 1px;
-        color: whitesmoke;
+        color: var(--app-main-color);
       }
       .tab:hover,
       .tab.active {
-        background-color: whitesmoke;
-        color: #262626;
+        background-color: var(--app-main-color);
+        color: var(--app-sub-color);
       }
     }
   }

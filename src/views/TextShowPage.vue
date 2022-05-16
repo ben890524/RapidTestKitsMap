@@ -221,7 +221,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .textShowPage {
-  background-color: whitesmoke;
+  background-color: var(--app-main-color);
   padding: 5px 10px;
   .textShowFilterBar {
     display: flex;
@@ -295,7 +295,7 @@ onBeforeUnmount(() => {
         outline: none;
         color: whitesmoke;
         background-color: #6f95bb;
-        padding: 10px;
+        padding: 7.5px 10px;
         margin-left: 20px;
         border-radius: 8px;
         border: none;
@@ -392,6 +392,24 @@ onBeforeUnmount(() => {
     }
     .textShow {
       height: calc(100vh - 177px);
+      padding-left: 20px;
+      margin-right: 25px;
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .textShowPage {
+    .textShow {
+      padding-left: 40px;
+      margin-right: 45px;
+    }
+  }
+}
+@media screen and (min-width: 1440px) {
+  .textShowPage {
+    .textShow {
+      padding-left: 50px;
+      margin-right: 55px;
     }
   }
 }
