@@ -3,10 +3,10 @@ import { getOpenData } from "@/services/Axios.opendata";
 /* interfaces */
 import OpenData from "@/interfaces/OpenData";
 const sortOpenDataByAddress = (next: OpenData, current: OpenData) => {
-  if (next.address < current.address) {
+  if (next.phone < current.phone) {
     return -1;
   }
-  if (next.address > current.address) {
+  if (next.phone > current.phone) {
     return 1;
   }
   return 0;
@@ -33,6 +33,7 @@ export const getOpenDataJson = async () => {
       openDataJson.push(newOpenData);
     }
   });
+  // console.log(openDataJson);
   openDataJson.sort(sortOpenDataByAddress);
   return openDataJson;
 };
