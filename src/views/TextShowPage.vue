@@ -390,6 +390,9 @@ onBeforeUnmount(() => {
         }
       }
     }
+    .textShowItemCount {
+      padding: 5px 35px 5px 0;
+    }
     .textShow {
       height: calc(100vh - 177px);
       padding-left: 20px;
@@ -399,6 +402,9 @@ onBeforeUnmount(() => {
 }
 @media screen and (min-width: 1024px) {
   .textShowPage {
+    .textShowItemCount {
+      padding: 5px 55px 5px 0;
+    }
     .textShow {
       padding-left: 40px;
       margin-right: 45px;
@@ -407,6 +413,9 @@ onBeforeUnmount(() => {
 }
 @media screen and (min-width: 1440px) {
   .textShowPage {
+    .textShowItemCount {
+      padding: 5px 65px 5px 0;
+    }
     .textShow {
       padding-left: 50px;
       margin-right: 55px;
