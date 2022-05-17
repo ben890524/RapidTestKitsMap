@@ -7,15 +7,17 @@
       </tr>
       <tr>
         <th>醫事機構地址</th>
-        <td class="tdIcon">
-          {{ openDataElement.address }}
-          <a
-            class="googleMapsIcon"
-            target="_blank"
-            :href="`https://www.google.com/maps?q=${openDataElement.name}+${openDataElement.address}`"
-          >
-            <img :src="googleMapsIcon" alt="" />
-          </a>
+        <td>
+          <div class="tdIcon">
+            {{ openDataElement.address }}
+            <a
+              class="googleMapsIcon"
+              target="_blank"
+              :href="`https://www.google.com/maps?q=${openDataElement.name}+${openDataElement.address}`"
+            >
+              <img :src="googleMapsIcon" alt="" />
+            </a>
+          </div>
         </td>
       </tr>
       <tr>
@@ -133,13 +135,12 @@ const props = defineProps({
         color: red;
         font-weight: 600;
       }
-      td.tdIcon {
-        height: max-content;
+      .tdIcon {
         display: flex;
         justify-content: space-between;
         align-items: center;
         .googleMapsIcon {
-          height: 27.5px;
+          height: 25px;
           padding: 5px;
           display: flex;
           justify-content: center;
