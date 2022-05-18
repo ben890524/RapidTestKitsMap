@@ -12,7 +12,8 @@
     "path": "^0.12.7",
     "sass": "^1.51.0",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vue3-openlayers": "^0.1.63"
   },
   "devDependencies": {
     "@types/node": "^17.0.33",
