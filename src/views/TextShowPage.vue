@@ -320,6 +320,7 @@ onBeforeUnmount(() => {
     height: calc(
       var(--mobileHeight)
     ); // define in /index.html resize function to solve mobile container 100vh problem
+    overflow-x: hidden;
     overflow-y: auto;
     margin-right: 5px;
     border-radius: 8px;
