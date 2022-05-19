@@ -133,6 +133,7 @@
 <script setup lang="ts">
 /* static file */
 import TaiwanNationSection from "@/assets/static/TaiwanNationSection.json";
+import TaiwanNationSectionLongitudeAndLatitude from "@/assets/static/TaiwanNationSectionLongitude&Latitude.json";
 /* import img */
 import pin from "@/assets/img/pin.png";
 import googleMapsIcon from "@/assets/img/GoogleMapsIcon.svg";
@@ -143,12 +144,15 @@ import { getOpenDataJson } from "@/services/Convert.opendata";
 /* interfaces */
 import OpenData from "@/interfaces/OpenData";
 import FilterData from "@/interfaces/FilterData";
+import LongitudeAndLatitudeData from "@/interfaces/LongitudeAndLatitudeData";
 /* components */
 import loadingScreen from "@/components/loadingScreen.vue";
 
 const filterDefaultIndex = ref<number>(-1);
-const filterDefaultString = ref<string>("");
 const filterData = reactive<FilterData[]>(TaiwanNationSection);
+const longitudeAndLatitudeData = reactive<LongitudeAndLatitudeData[]>(
+  TaiwanNationSectionLongitudeAndLatitude
+);
 const mapDefaultCenter = ref<number[]>([121.512, 25.04]);
 const projection = ref<string>("EPSG:4326");
 const zoomSize = ref(17);
@@ -165,13 +169,13 @@ const defaultOpenDataElementDetail = ref<OpenData>({
   datatime: "",
   remark: "",
 });
-const defaultCenterPadding = 0.002;
+const defaultCenterPadding = 0.0021;
 
 let openDataRefreshTime = ref<string>("");
 let targetFilterDataCountyNameIndex = ref<number>(-1);
 let targetFilterDataCountySectionIndex = ref<number>(-1);
 let targetFilterData = ref<FilterData>({ countyName: "", countySection: [] });
-let filterString = ref<string>("");
+let filterLongitudeAndLatitude = ref<number[]>([121.512, 25.04]);
 let allOpenData = ref<OpenData[]>([]);
 let mapCenter = ref(mapDefaultCenter);
 let isShowingTargetOpenDataElementDetail = ref<boolean>(false);
@@ -198,11 +202,14 @@ const setDefaultCountyNameIndex = () => {
 const setDefaultCountySectionIndex = () => {
   targetFilterDataCountySectionIndex.value = filterDefaultIndex.value;
 };
-const setDefaultFilterString = () => {
-  filterString.value = filterDefaultString.value;
+const setDefaultFilterLongitudeAndLatitude = () => {
+  filterLongitudeAndLatitude.value = mapDefaultCenter.value;
 };
 const setTargetOpenDataElementDetail = (openDataElement: OpenData) => {
   targetOpenDataElementDetail.value = openDataElement;
+};
+const setDefaultMapCenter = () => {
+  mapCenter.value = mapDefaultCenter.value;
 };
 const clearTargetOpenDataElementDetail = () => {
   targetOpenDataElementDetail.value = defaultOpenDataElementDetail.value;
@@ -230,7 +237,7 @@ const filterChangeHandler = () => {
   } else {
     setDefaultCountyNameIndex();
     setDefaultCountySectionIndex();
-    setDefaultFilterString();
+    setDefaultFilterLongitudeAndLatitude();
   }
 };
 
@@ -239,21 +246,34 @@ const executeFilter = () => {
     targetFilterDataCountyNameIndex.value !== filterDefaultIndex.value &&
     targetFilterDataCountySectionIndex.value !== filterDefaultIndex.value
   ) {
-    filterString.value = `${
-      filterData[targetFilterDataCountyNameIndex.value].countyName
-    }${
-      filterData[targetFilterDataCountyNameIndex.value].countySection[
-        targetFilterDataCountySectionIndex.value
-      ]
-    }`;
-    console.log(filterString.value);
+    filterLongitudeAndLatitude.value =
+      longitudeAndLatitudeData[
+        targetFilterDataCountyNameIndex.value
+      ].longitudeAndLatitude[targetFilterDataCountySectionIndex.value];
+    mapCenter.value = filterLongitudeAndLatitude.value;
+    setIsNotShowingTargetOpenDataElementDetail();
+  }
+};
+const getUserCurrentLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position: GeolocationPosition) => {
+        mapCenter.value = [position.coords.longitude, position.coords.latitude];
+      },
+      () => {
+        setDefaultMapCenter();
+      }
+    );
+  } else {
   }
 };
 onMounted(async () => {
+  getUserCurrentLocation();
   setIsNowLoading();
   allOpenData.value = await getOpenDataJson();
   setOpenDataRefreshTime();
   setIsNotNowLoading();
+  navigator.geolocation.getCurrentPosition;
 });
 </script>
 
