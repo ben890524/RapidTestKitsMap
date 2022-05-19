@@ -8,8 +8,8 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0"
     />
     <title>現有快篩試劑查詢</title>
-    <script type="module" crossorigin src="./assets/index.3767c17b.js"></script>
-    <link rel="stylesheet" href="./assets/index.9693f32d.css">
+    <script type="module" crossorigin src="./assets/index.bf050044.js"></script>
+    <link rel="stylesheet" href="./assets/index.071167a3.css">
   </head>
   <body>
     <div id="app"></div>
@@ -17,19 +17,32 @@
     <script defer>
       function calculateVh() {
         let mobileHeight;
+        let mobileHeightForMap;
         if (window.innerWidth >= 503) {
           mobileHeight = window.innerHeight - 169;
         } else {
           mobileHeight = window.innerHeight - 199;
         }
-        document.documentElement.style.setProperty("--mobileHeight", mobileHeight + "px");
+        if (window.innerWidth >= 768) {
+          mobileHeightForMap = window.innerHeight - 194;
+        } else if (window.innerWidth >= 503) {
+          mobileHeightForMap = window.innerHeight - 186;
+        } else{
+          mobileHeightForMap = window.innerHeight - 166;
+        }
+        document.documentElement.style.setProperty(
+          "--mobileHeight",
+          mobileHeight + "px"
+        );
+        document.documentElement.style.setProperty(
+          "--mobileHeightForMap",
+          mobileHeightForMap + 50 + "px"
+        );
       }
       // Initial calculation
       calculateVh();
-
       // Re-calculate on resize
       window.addEventListener("resize", calculateVh);
-
       // Re-calculate on device orientation change
       window.addEventListener("orientationchange", calculateVh);
     </script>
