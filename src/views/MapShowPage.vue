@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="button">
-        <button @click="executeFilter()">確認篩選</button>
+        <button @click="executeFilter()">確認移動</button>
       </div>
     </div>
     <ol-map
@@ -53,7 +53,7 @@
       <ol-view
         ref="view"
         :center="mapCenter"
-        :rotation="0"
+        :rotation="rotation"
         :zoom="zoomSize"
         :projection="projection"
         :minZoom="10"
@@ -128,6 +128,7 @@
       </div>
     </div>
   </div>
+  <loadingScreen :isNowLoading="isNowLoading" />
 </template>
 <script setup lang="ts">
 /* static file */
@@ -142,13 +143,16 @@ import { getOpenDataJson } from "@/services/Convert.opendata";
 /* interfaces */
 import OpenData from "@/interfaces/OpenData";
 import FilterData from "@/interfaces/FilterData";
+/* components */
+import loadingScreen from "@/components/loadingScreen.vue";
 
 const filterDefaultIndex = ref<number>(-1);
 const filterDefaultString = ref<string>("");
 const filterData = reactive<FilterData[]>(TaiwanNationSection);
-const mapDefaultCenter = ref([121.512, 25.04]);
-const projection = ref("EPSG:4326");
+const mapDefaultCenter = ref<number[]>([121.512, 25.04]);
+const projection = ref<string>("EPSG:4326");
 const zoomSize = ref(17);
+const rotation = ref(0);
 const defaultOpenDataElementDetail = ref<OpenData>({
   id: "",
   name: "",
@@ -162,6 +166,7 @@ const defaultOpenDataElementDetail = ref<OpenData>({
   remark: "",
 });
 const defaultCenterPadding = 0.002;
+
 let openDataRefreshTime = ref<string>("");
 let targetFilterDataCountyNameIndex = ref<number>(-1);
 let targetFilterDataCountySectionIndex = ref<number>(-1);
@@ -170,9 +175,17 @@ let filterString = ref<string>("");
 let allOpenData = ref<OpenData[]>([]);
 let mapCenter = ref(mapDefaultCenter);
 let isShowingTargetOpenDataElementDetail = ref<boolean>(false);
+let isNowLoading = ref<boolean>(false);
 let targetOpenDataElementDetail = ref<OpenData>(
   defaultOpenDataElementDetail.value
 );
+
+const setIsNowLoading = () => {
+  isNowLoading.value = true;
+};
+const setIsNotNowLoading = () => {
+  isNowLoading.value = false;
+};
 const setOpenDataRefreshTime = () => {
   const currentDate = new Date();
   openDataRefreshTime.value = `${currentDate.toDateString()} ${currentDate
@@ -237,8 +250,10 @@ const executeFilter = () => {
   }
 };
 onMounted(async () => {
+  setIsNowLoading();
   allOpenData.value = await getOpenDataJson();
   setOpenDataRefreshTime();
+  setIsNotNowLoading();
 });
 </script>
 
@@ -350,6 +365,9 @@ onMounted(async () => {
   .mapPin:hover {
     background-color: #002255;
   }
+  .mapPin:active {
+    background-color: #002255;
+  }
   .openDataElementDetail {
     position: absolute;
     width: 100%;
@@ -385,7 +403,7 @@ onMounted(async () => {
       table.openDataTable {
         width: 100%;
         border-spacing: 0;
-        border: 1px solid var(--table-table-border-color);
+        border: 0.5px solid var(--table-table-border-color);
         tr {
           border: 0.5px solid var(--table-table-border-color);
           td,

@@ -4,6 +4,7 @@
       <div class="loadingSpinnerImg">
         <img :src="loadingSpinner" alt="" />
       </div>
+      <div class="autoUpdateNotice">請稍後<br />初始化資料中...</div>
     </div>
   </div>
   <div class="loadingScreen" v-else-if="isNowAutoUpdating">
@@ -28,7 +29,7 @@ const props = defineProps({
   },
   isNowAutoUpdating: {
     type: Boolean,
-    required: true,
+    required: false,
   },
 });
 </script>
