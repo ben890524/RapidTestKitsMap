@@ -1,6 +1,6 @@
 <template>
   <div class="openDataElement">
-    <table class="openDataTable mobile">
+    <table v-if="isMobileOrBrowser === 'Mobile'" class="openDataTable mobile">
       <tr>
         <th>醫事機構名稱</th>
         <td>{{ openDataElement.name }}</td>
@@ -45,7 +45,10 @@
         <td>{{ openDataElement.remark }}</td>
       </tr>
     </table>
-    <table class="openDataTable browser">
+    <table
+      v-else-if="isMobileOrBrowser === 'Browser'"
+      class="openDataTable browser"
+    >
       <tr>
         <th colspan="4" class="openDataLeft">醫事機構名稱</th>
         <th class="openDataRight">醫事機構代碼</th>
@@ -106,6 +109,10 @@ const props = defineProps({
     required: true,
   },
   openDataRefreshTime: {
+    type: String,
+    required: true,
+  },
+  isMobileOrBrowser: {
     type: String,
     required: true,
   },

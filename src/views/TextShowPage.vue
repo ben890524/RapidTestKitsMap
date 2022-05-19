@@ -59,6 +59,7 @@
         :key="openDataElement.id"
         :openDataElement="openDataElement"
         :openDataRefreshTime="openDataRefreshTime"
+        :isMobileOrBrowser="isMobileOrBrowser"
       />
     </div>
   </div>
@@ -73,7 +74,7 @@ import TaiwanNationSection from "@/assets/static/TaiwanNationSection.json";
 /* vue module */
 import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 /* services */
-import { getOpenDataJson } from "@/services/Convert.opendata";
+import { getSortOpenDataJson } from "@/services/Convert.opendata";
 /* interfaces */
 import OpenData from "@/interfaces/OpenData";
 import FilterData from "@/interfaces/FilterData";
@@ -86,6 +87,7 @@ const filterDefaultString = ref<string>("");
 const filterData = reactive<FilterData[]>(TaiwanNationSection);
 const autoUpdateIntervalForOneMinute = ref<number>(60000);
 
+let isMobileOrBrowser = ref<string>("Mobile");
 let allOpenData = ref<OpenData[]>([]);
 let showOpenData = ref<OpenData[]>([]);
 let autoUpdateOpenData = ref<OpenData[]>([]);
@@ -105,7 +107,7 @@ const setDefaultCountySectionIndex = () => {
   targetFilterDataCountySectionIndex.value = filterDefaultIndex.value;
 };
 const setDefaultShowOpenData = async () => {
-  allOpenData.value = await getOpenDataJson();
+  allOpenData.value = await getSortOpenDataJson();
   showOpenData.value = allOpenData.value;
 };
 const setDefaultTargetFilterData = () => {
@@ -178,8 +180,8 @@ const autoUpdateNewShowOpendata = () => {
 };
 const autoUpdateCompareShowOpenData = async () => {
   setIsAutoUpdating();
-  allOpenData.value = await getOpenDataJson();
-  autoUpdateOpenData.value = await getOpenDataJson();
+  allOpenData.value = await getSortOpenDataJson();
+  autoUpdateOpenData.value = await getSortOpenDataJson();
   setOpenDataRefreshTime();
   autoUpdateOpenData.value = autoUpdateOpenData.value.filter(
     (openDataElement) => {
@@ -205,9 +207,18 @@ const setAutoUpdateTimer = () => {
 const clearAutoUpdateTimer = () => {
   window.clearInterval(autoUpdateIntervalTimerId.value);
 };
+const checkIsMobileOrBrowser = () => {
+  window.innerWidth >= 768
+    ? (isMobileOrBrowser.value = "Browser")
+    : (isMobileOrBrowser.value = "Mobile");
+  console.log(window.innerWidth);
+  console.log(isMobileOrBrowser.value);
+};
 onMounted(async () => {
+  checkIsMobileOrBrowser();
+  window.addEventListener("resize", checkIsMobileOrBrowser);
   setIsNowLoading();
-  allOpenData.value = await getOpenDataJson();
+  allOpenData.value = await getSortOpenDataJson();
   showOpenData.value = allOpenData.value;
   setOpenDataRefreshTime();
   setOpenDataRefreshTime();
@@ -216,6 +227,7 @@ onMounted(async () => {
 });
 onBeforeUnmount(() => {
   clearAutoUpdateTimer();
+  window.removeEventListener("resize", checkIsMobileOrBrowser);
 });
 </script>
 
