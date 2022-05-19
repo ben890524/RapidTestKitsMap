@@ -418,7 +418,7 @@ onMounted(async () => {
       }
     }
     .showTargetDataDetail {
-      padding: 5px 10px;
+      padding: 5px 10px 10px 10px;
       border-radius: 8px;
       table.openDataTable {
         width: 100%;
