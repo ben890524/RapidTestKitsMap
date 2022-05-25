@@ -1,5 +1,30 @@
+# RapidTestKitsMap
+
+A Website lets people can search testkits in Taiwan.
+All things are made by Ben Li.
+
 # Demo Page
-- [現有快篩試劑列表](https://ben890524.github.io/RapidTestKitsMap/#/index/textshow)
+
+[現有快篩試劑列表](https://ben890524.github.io/RapidTestKitsMap/#/index/textshow)
+
+# 研究用途
+
+- 練習RWD排版
+- 練習Vue3語法與生命週期
+- 練習ts用法及實作
+- 使用套件做出視覺地圖，並顯示地圖資訊給使用者
+
+# 公開資料來源
+
+[政府資料開放平台](https://data.gov.tw/dataset/152408)
+
+# 用到的工具
+
+- Vue3
+- Scss
+- TypeScript
+- Vite
+- Vue3-openlayers
 
 # Vue 3 + TypeScript + Vite
 
